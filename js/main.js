@@ -23,12 +23,18 @@
   var videoReady = false;
   var finished = false;
 
-  video.addEventListener('canplaythrough', function () {
+  function markVideoReady() {
     if (videoReady) { return; }
     videoReady = true;
     // primer frame como "portada" (el CSS lo funde sobre la B)
     splash.classList.add('splash--video');
-  });
+  }
+
+  video.addEventListener('canplaythrough', markVideoReady);
+
+  // si el video ya venía listo (caché/CDN rápido) el evento pudo dispararse
+  // antes de registrar el listener: se comprueba el estado directamente
+  if (video.readyState >= 3) { markVideoReady(); }
 
   // doble respaldo de cierre: ended y un temporizador con la duración real
   video.addEventListener('ended', function () {
