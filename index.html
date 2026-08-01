@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>blackmiel — Productora</title>
+  <meta name="description" content="blackmiel — productora audiovisual. Portafolio, quiénes somos y contacto.">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ============ PANTALLA 1 · SPLASH ============ -->
+  <section id="splash" class="screen screen--visible">
+    <video id="introVideo" class="splash__video" src="assets/intro.mp4" muted playsinline preload="auto"></video>
+    <div class="splash__center">
+      <span class="splash__b" id="splashB">B</span>
+    </div>
+    <button class="splash__btn" id="btnEnter" type="button">Entrar</button>
+    <a class="splash__special" href="dia-de-los-santos-inocentes.html">Proyecto especial: Santos Inocentes ↗</a>
+  </section>
+
+  <!-- ============ PANTALLA 2 · FLASH DE INTRO ============ -->
+  <div id="introFlash"></div>
+
+  <!-- ============ PANTALLA 3 · SELECTOR DE PERFILES ============ -->
+  <section id="profiles" class="screen">
+    <h1 class="profiles__title">¿Quién ve <span class="brand">blackmiel</span>?</h1>
+    <ul class="profiles__list">
+      <li class="profile" data-section="nosotros" tabindex="0">
+        <div class="profile__avatar profile__avatar--amber">
+          <img src="assets/abeja.png" alt="" draggable="false">
+        </div>
+        <span class="profile__name">Nosotros</span>
+      </li>
+      <li class="profile" data-section="portafolio" tabindex="0">
+        <div class="profile__avatar profile__avatar--dark">
+          <img src="assets/portafolio-icono.png" alt="" draggable="false">
+        </div>
+        <span class="profile__name">Portafolio</span>
+      </li>
+      <li class="profile" data-section="contacto" tabindex="0">
+        <div class="profile__avatar profile__avatar--outline">
+          <img src="assets/contacto-icono.png" alt="" class="profile__bee--amber" draggable="false">
+        </div>
+        <span class="profile__name">Contacto</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ PANTALLA 4 · INTERFAZ PRINCIPAL ============ -->
+  <div id="app" class="screen">
+
+    <nav class="navbar">
+      <img src="assets/blackmiel-logotipo-blanco.png" alt="blackmiel" class="navbar__logo" id="navLogo">
+      <ul class="navbar__links">
+        <li><a href="#" data-section="nosotros">Nosotros</a></li>
+        <li><a href="#" data-section="portafolio">Portafolio</a></li>
+        <li><a href="#" data-section="contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+    <!-- ······ SECCIÓN NOSOTROS ······ -->
+    <main class="section" id="section-nosotros">
+      <header class="hero hero--nosotros">
+        <div class="hero__content">
+          <h2 class="hero__title">Nosotros</h2>
+          <p class="hero__desc">Somos una casa productora independiente que prioriza la perspectiva creativa y de impacto social de sus proyectos.</p>
+          <p class="hero__desc">En BLACKMIEL nos enfocamos en la narrativa, el ritmo y el detalle para que cada proyecto conecte sin perder su identidad.</p>
+          <div class="hero__cta">
+            <p class="hero__question">¿Tienes un proyecto en mente?</p>
+            <button class="btn btn--play" id="ctaContacto" type="button">Iniciar proyecto</button>
+          </div>
+        </div>
+        <div class="hero__fade"></div>
+      </header>
+
+      <section class="row">
+        <h3 class="row__title">Reconocimientos <span class="row__subtitle">— Un Mundo Casi Feliz</span></h3>
+        <div class="row__scroller">
+          <article class="card" data-hue="3"><div class="card__thumb"><span class="card__ph">Mejor Comedia</span></div><div class="card__info"><h4>Mejor Comedia</h4><p>Vegas Movie Awards</p></div></article>
+          <article class="card" data-hue="1"><div class="card__thumb"><span class="card__ph">Mejor Corto Internacional</span></div><div class="card__info"><h4>Mejor Corto Internacional</h4><p>Vegas Movie Awards</p></div></article>
+          <article class="card" data-hue="4"><div class="card__thumb"><span class="card__ph">Premiado</span></div><div class="card__info"><h4>Premiado</h4><p>Hodu Film Awards</p></div></article>
+          <article class="card" data-hue="2"><div class="card__thumb"><span class="card__ph">Premiado</span></div><div class="card__info"><h4>Premiado</h4><p>Lonely Wolf Int'l Film Festival</p></div></article>
+          <article class="card" data-hue="5"><div class="card__thumb"><span class="card__ph">Premiado</span></div><div class="card__info"><h4>Premiado</h4><p>Absurd Film Festival</p></div></article>
+          <article class="card" data-hue="3"><div class="card__thumb"><span class="card__ph">Premiado</span></div><div class="card__info"><h4>Premiado</h4><p>Only The Best Film Awards</p></div></article>
+        </div>
+      </section>
+    </main>
+
+    <!-- ······ SECCIÓN PORTAFOLIO ······ -->
+    <main class="section" id="section-portafolio">
+      <header class="hero hero--portafolio hero--reel">
+        <div class="hero__content">
+          <h2 class="hero__title">Reel 2026</h2>
+          <p class="hero__desc">Un vistazo a nuestro trabajo detrás y frente a cámara.</p>
+          <div class="hero__actions">
+            <button class="btn btn--play" id="btnPlayReel" type="button">▶&nbsp; Reproducir</button>
+            <a class="btn btn--info" href="https://www.imdb.com/es/name/nm15257278/" target="_blank" rel="noopener">IMDb ↗</a>
+          </div>
+        </div>
+        <div class="hero__fade"></div>
+      </header>
+
+      <section class="row">
+        <h3 class="row__title">Cortometrajes</h3>
+        <div class="row__scroller row__scroller--posters">
+          <a class="card card--poster" data-hue="1" href="https://filmfreeway.com/projects/3282862" target="_blank" rel="noopener">
+            <div class="card__thumb"><img src="assets/posters/el-amuleto.jpg" alt="Póster de El Amuleto" loading="lazy"></div>
+            <div class="card__info"><h4>El Amuleto</h4><p>2025 · Drama, experimental · 7 min</p></div>
+          </a>
+          <a class="card card--poster" data-hue="3" href="https://filmfreeway.com/projects/3140636" target="_blank" rel="noopener">
+            <div class="card__thumb"><img src="assets/posters/cuando-pienso-en-mi-muerte.jpg" alt="Póster de Cuando Pienso en mi Muerte" loading="lazy"></div>
+            <div class="card__info"><h4>Cuando Pienso en mi Muerte</h4><p>2024 · Drama · 13 min</p></div>
+          </a>
+          <a class="card card--poster" data-hue="5" href="https://filmfreeway.com/projects/2057486" target="_blank" rel="noopener">
+            <div class="card__thumb"><img src="assets/posters/un-mundo-casi-feliz.jpg" alt="Póster de Un Mundo Casi Feliz" loading="lazy"></div>
+            <div class="card__info"><h4>Un Mundo Casi Feliz</h4><p>2020 · Comedia, drama · 3 min</p></div>
+          </a>
+          <a class="card card--poster" data-hue="2" href="https://filmfreeway.com/projects/2454568" target="_blank" rel="noopener">
+            <div class="card__thumb"><img src="https://filmfreeway-production-storage-01-connector.filmfreeway.com/press_kits/posters/002/072/282/original/de63a5016f-poster.jpg?1682789215" alt="Póster de Lenguaje Inclusivo" loading="lazy"></div>
+            <div class="card__info"><h4>Lenguaje Inclusivo</h4><p>2021 · Comedia · 3 min</p></div>
+          </a>
+          <a class="card card--poster" data-hue="4" href="https://filmfreeway.com/projects/1849851" target="_blank" rel="noopener">
+            <div class="card__thumb"><img src="assets/posters/pequenos-gestos.jpg" alt="Póster de Pequeños Gestos" loading="lazy"></div>
+            <div class="card__info"><h4>Pequeños Gestos</h4><p>2019 · Drama, comedia · 3 min</p></div>
+          </a>
+          <a class="card card--poster" data-hue="1" href="https://filmfreeway.com/projects/1838065" target="_blank" rel="noopener">
+            <div class="card__thumb"><img src="assets/posters/el-poema-de-lisa.jpg" alt="Póster de El Poema de Lisa" loading="lazy"></div>
+            <div class="card__info"><h4>El Poema de Lisa</h4><p>2019 · Drama, experimental · 13 min</p></div>
+          </a>
+          <a class="card card--poster" data-hue="3" href="https://filmfreeway.com/projects/1551568" target="_blank" rel="noopener">
+            <div class="card__thumb"><img src="assets/posters/el-quinto.jpg" alt="Póster de El Quinto" loading="lazy"></div>
+            <div class="card__info"><h4>El Quinto</h4><p>2018 · Drama, aventura · 15 min</p></div>
+          </a>
+          <a class="card card--poster" data-hue="5" href="https://filmfreeway.com/projects/1589400" target="_blank" rel="noopener">
+            <div class="card__thumb"><img src="https://filmfreeway-production-storage-01-connector.filmfreeway.com/press_kits/posters/001/207/114/original/437a8209bc-poster.jpg?1543961909" alt="Póster de La Rueda Rueda" loading="lazy"></div>
+            <div class="card__info"><h4>La Rueda Rueda</h4><p>2018 · Cortometraje · 6 min</p></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="row">
+        <h3 class="row__title">Comerciales &amp; Contenido de Marca</h3>
+        <div class="row__scroller">
+          <button class="card" type="button" data-video="e6oNhARIjDs" data-hue="2">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/e6oNhARIjDs/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>La Yipeta</h4><p>Videoclip · Tony Almont</p></div>
+          </button>
+          <button class="card" type="button" data-video="8zvvs8B0NPo" data-hue="5">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/8zvvs8B0NPo/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Cerveza República</h4><p>Comercial</p></div>
+          </button>
+          <button class="card" type="button" data-video="AqHlIr-dvwQ" data-hue="1">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/AqHlIr-dvwQ/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Café Santo Domingo</h4><p>Comercial</p></div>
+          </button>
+          <button class="card" type="button" data-video="m-wzMah8m3U" data-hue="4">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/m-wzMah8m3U/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>City of Angels</h4><p>Title Sequence · EditFest</p></div>
+          </button>
+          <button class="card" type="button" data-video="GSHsuAeyT-k" data-hue="3">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/GSHsuAeyT-k/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Frutos del Palo</h4><p>Minidocumental</p></div>
+          </button>
+          <button class="card" type="button" data-video="sQh2k4eLWvk" data-hue="2">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/sQh2k4eLWvk/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Hay un País en el Mundo</h4><p>Videoarte</p></div>
+          </button>
+          <button class="card" type="button" data-video="ZxguMuuaVrU" data-hue="5">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/ZxguMuuaVrU/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Vuelo sobre Santo Domingo</h4><p>Videoarte</p></div>
+          </button>
+        </div>
+      </section>
+
+      <section class="row">
+        <h3 class="row__title">Impacto Social <span class="row__subtitle">— World Vision República Dominicana</span></h3>
+        <div class="row__scroller">
+          <button class="card" type="button" data-video="Bry4nF8aECA" data-hue="1">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/Bry4nF8aECA/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Eileen Glass</h4><p>Embajadora WVRD</p></div>
+          </button>
+          <button class="card" type="button" data-video="-pM_T7byRaI" data-hue="4">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/-pM_T7byRaI/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>La Ternura al Criar</h4><p>Eileen Glass · Haina</p></div>
+          </button>
+          <button class="card" type="button" data-video="DtFOD2OIbQQ" data-hue="3">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/DtFOD2OIbQQ/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Los Zapatos de Otro</h4><p>Vivian Fatule · Miches</p></div>
+          </button>
+          <button class="card" type="button" data-video="qQHfPJquq2g" data-hue="2">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/qQHfPJquq2g/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Haina, ¿Ciudad Olvidada?</h4><p>Victor Dionisio</p></div>
+          </button>
+          <button class="card" type="button" data-video="UtdsgrNjr38" data-hue="5">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/UtdsgrNjr38/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Criar con Amor</h4><p>Yadhira Pimentel · El Seibo</p></div>
+          </button>
+          <button class="card" type="button" data-video="LQJDtYtX6sw" data-hue="1">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/LQJDtYtX6sw/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Río Limpio</h4><p>William Ramos</p></div>
+          </button>
+          <button class="card" type="button" data-video="tn2oBVhkGoE" data-hue="4">
+            <div class="card__thumb"><img src="https://img.youtube.com/vi/tn2oBVhkGoE/hqdefault.jpg" alt="" loading="lazy"></div>
+            <div class="card__info"><h4>Pedigüeño</h4><p>Concurso audiovisual WVRD</p></div>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ······ SECCIÓN CONTACTO ······ -->
+    <main class="section" id="section-contacto">
+      <header class="hero hero--contacto">
+        <div class="hero__content">
+          <h2 class="hero__title">Hablemos</h2>
+          <p class="hero__desc">¿Tienes un proyecto en mente? Cuéntanos y hagamos algo dulce juntos.</p>
+        </div>
+        <div class="hero__fade"></div>
+      </header>
+
+      <section class="contact">
+        <form class="contact__form" id="contactForm" novalidate>
+          <h3 class="row__title">Escríbenos</h3>
+          <label>Nombre<input type="text" name="nombre" placeholder="Tu nombre" required></label>
+          <label>Correo<input type="email" name="correo" placeholder="tu@correo.com" required></label>
+          <label>Mensaje<textarea name="mensaje" rows="5" placeholder="Cuéntanos tu proyecto…" required></textarea></label>
+          <button class="btn btn--play contact__submit" type="submit">Enviar</button>
+          <p class="contact__ok" id="contactOk" hidden>¡Gracias! Te responderemos pronto. 🐝</p>
+        </form>
+        <aside class="contact__data">
+          <h3 class="row__title">Datos directos</h3>
+          <p><span class="contact__label">Correo</span><a href="mailto:hola@blackmiel.com">hola@blackmiel.com</a></p>
+          <p><span class="contact__label">WhatsApp</span><a href="#">+00 000 000 0000</a></p>
+          <p><span class="contact__label">Instagram</span><a href="#">@blackmiel</a></p>
+          <p><span class="contact__label">YouTube</span><a href="https://youtu.be/you3gtMIt4U" target="_blank" rel="noopener">Reel 2026</a></p>
+          <p><span class="contact__label">IMDb</span><a href="https://www.imdb.com/es/name/nm15257278/" target="_blank" rel="noopener">Danny Camacho</a></p>
+          <img src="assets/blackmiel-solo-logo.png" alt="" class="contact__bee">
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <img src="assets/blackmiel-letra.png" alt="blackmiel" class="footer__logo">
+      <p>© 2026 blackmiel. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+  <!-- ============ MODAL · REEL ============ -->
+  <div id="reelModal" class="reel-modal" hidden>
+    <div class="reel-modal__backdrop" id="reelBackdrop"></div>
+    <div class="reel-modal__box">
+      <button class="reel-modal__close" id="reelClose" type="button" aria-label="Cerrar">✕</button>
+      <div class="reel-modal__frame" id="reelFrame"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
