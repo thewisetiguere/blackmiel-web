@@ -32,21 +32,51 @@
     });
   }
 
-  /* ---------- formulario de contacto (placeholder) ---------- */
+  /* ---------- formulario de contacto (FormSubmit, vía AJAX) ---------- */
 
+  var FORM_EMAIL = 'blackmielrd@gmail.com';
   var dsiForm = document.getElementById('dsiForm');
   var dsiFormOk = document.getElementById('dsiFormOk');
+  var dsiFormError = document.getElementById('dsiFormError');
 
   if (dsiForm) {
+    var dsiSubmitBtn = dsiForm.querySelector('button[type="submit"]');
+    var dsiSubmitLabel = dsiSubmitBtn.textContent;
+
     dsiForm.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!dsiForm.checkValidity()) {
         dsiForm.reportValidity();
         return;
       }
-      // pendiente: conectar con backend / servicio de correo real
-      dsiForm.reset();
-      dsiFormOk.hidden = false;
+
+      var payload = {};
+      new FormData(dsiForm).forEach(function (value, key) { payload[key] = value; });
+      payload._captcha = false; // el captcha de FormSubmit es una página propia; no aplica en AJAX
+      payload._replyto = payload.correo;
+
+      dsiFormOk.hidden = true;
+      dsiFormError.hidden = true;
+      dsiSubmitBtn.disabled = true;
+      dsiSubmitBtn.textContent = 'Enviando…';
+
+      fetch('https://formsubmit.co/ajax/' + FORM_EMAIL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) {
+          if (!res.ok) { throw new Error('FormSubmit respondió ' + res.status); }
+          dsiForm.reset();
+          dsiFormOk.hidden = false;
+        })
+        .catch(function () {
+          dsiFormError.hidden = false;
+        })
+        .then(function () {
+          dsiSubmitBtn.disabled = false;
+          dsiSubmitBtn.textContent = dsiSubmitLabel;
+        });
     });
   }
 })();

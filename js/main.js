@@ -15,6 +15,14 @@
   var navLogo = document.getElementById('navLogo');
   var video = document.getElementById('introVideo');
 
+  /* ---------- URLs limpias (History API) ----------
+     /nosotros, /portafolio, /contacto son enlaces compartibles: entran
+     directo a la sección sin pasar por el splash/intro ni el selector.
+     "/" y "/home" sí muestran la experiencia completa. */
+
+  var PATH_TO_SECTION = { '/nosotros': 'nosotros', '/portafolio': 'portafolio', '/contacto': 'contacto' };
+  var SECTION_TO_PATH = { nosotros: '/nosotros', portafolio: '/portafolio', contacto: '/contacto' };
+
   /* ---------- 2 · intro en video (audio incrustado, ~5.5s) ----------
      El video ya trae su propio jingle: se reproduce completo desde el
      inicio al hacer clic, sin cortes ni saltos de tiempo.
@@ -122,7 +130,8 @@
     });
   }
 
-  function showSection(name) {
+  function showSection(name, opts) {
+    opts = opts || {};
     document.querySelectorAll('.section').forEach(function (s) {
       s.classList.toggle('section--active', s.id === 'section-' + name);
     });
@@ -142,6 +151,13 @@
     } else {
       pauseCarousels();
     }
+
+    if (!opts.skipPush) {
+      var path = SECTION_TO_PATH[name] || '/';
+      if (location.pathname !== path) {
+        history.pushState({ section: name }, '', path);
+      }
+    }
   }
 
   document.querySelectorAll('.navbar__links a').forEach(function (a) {
@@ -158,7 +174,7 @@
   }
 
   // el logo del navbar vuelve al selector de perfiles
-  navLogo.addEventListener('click', function () {
+  function backToProfiles() {
     pauseCarousels();
     gsap.to(app, {
       opacity: 0,
@@ -171,6 +187,26 @@
         gsap.fromTo(profiles, { opacity: 0 }, { opacity: 1, duration: 0.6 });
       }
     });
+  }
+
+  navLogo.addEventListener('click', function () {
+    if (location.pathname !== '/') { history.pushState({ profiles: true }, '', '/'); }
+    backToProfiles();
+  });
+
+  // botón "atrás"/"adelante" del navegador
+  window.addEventListener('popstate', function () {
+    var section = PATH_TO_SECTION[location.pathname];
+    if (section) {
+      if (!app.classList.contains('screen--visible')) {
+        profiles.classList.remove('screen--visible');
+        profiles.style.display = 'none';
+        app.classList.add('screen--visible');
+      }
+      showSection(section, { skipPush: true });
+    } else if (app.classList.contains('screen--visible')) {
+      backToProfiles();
+    }
   });
 
   /* ---------- modal del reel (YouTube, carga solo al abrir) ---------- */
@@ -209,10 +245,14 @@
     });
   }
 
-  /* ---------- formulario de contacto (placeholder) ---------- */
+  /* ---------- formulario de contacto (FormSubmit, vía AJAX) ---------- */
 
+  var FORM_EMAIL = 'blackmielrd@gmail.com';
   var form = document.getElementById('contactForm');
   var ok = document.getElementById('contactOk');
+  var formError = document.getElementById('contactError');
+  var submitBtn = form.querySelector('.contact__submit');
+  var submitBtnLabel = submitBtn.textContent;
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -220,10 +260,36 @@
       form.reportValidity();
       return;
     }
-    // pendiente: conectar con backend / servicio de correo real
-    form.reset();
-    ok.hidden = false;
-    gsap.fromTo(ok, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5 });
+
+    var payload = {};
+    new FormData(form).forEach(function (value, key) { payload[key] = value; });
+    payload._captcha = false; // el captcha de FormSubmit es una página propia; no aplica en AJAX
+    payload._replyto = payload.correo;
+
+    ok.hidden = true;
+    formError.hidden = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando…';
+
+    fetch('https://formsubmit.co/ajax/' + FORM_EMAIL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(function (res) {
+        if (!res.ok) { throw new Error('FormSubmit respondió ' + res.status); }
+        form.reset();
+        ok.hidden = false;
+        gsap.fromTo(ok, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5 });
+      })
+      .catch(function () {
+        formError.hidden = false;
+        gsap.fromTo(formError, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5 });
+      })
+      .then(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitBtnLabel;
+      });
   });
 
   /* ============================================================
@@ -366,5 +432,151 @@
       c.paused = false;
       c.restart();
     });
+  }
+
+  /* ============================================================
+     Panel de Cortometrajes: detalle inline debajo de la fila.
+     No es modal — la página sigue siendo usable, no bloquea scroll,
+     y solo se cierra con el botón ✕ (nunca al hacer clic afuera).
+     Va debajo de la fila y no dentro de la card porque el carrusel
+     clona cada card 3 veces para el loop infinito (ver arriba); un
+     panel dentro de la card se triplicaría y quedaría recortado por
+     el overflow-x del scroller.
+     ============================================================ */
+
+  var SHORTS = {
+    'el-amuleto': {
+      titulo: 'El Amuleto', anio: 2025, duracion: '7 min', genero: 'Drama, experimental',
+      poster: 'assets/posters/el-amuleto.jpg',
+      sinopsis: 'Una moneda. Un deseo. Un joven convencido de que tiene el control. La suerte, sin embargo, tiene sus propias reglas. Y no siempre juega limpio.',
+      direccion: 'Danny Camacho', publico: false, linkPublico: null
+    },
+    'cuando-pienso': {
+      titulo: 'Cuando Pienso en mi Muerte', anio: 2024, duracion: '13 min', genero: 'Drama',
+      poster: 'assets/posters/cuando-pienso-en-mi-muerte.jpg',
+      sinopsis: 'Hay dolores que no se olvidan, sino que se acumulan. Gabriel lo sabe. Atrapado entre la culpa y los fantasmas de su infancia, deberá recorrer sus propios recuerdos fragmentados para descubrir si la reconciliación es posible o solo otra forma de pérdida.',
+      direccion: 'Danny Camacho', publico: false, linkPublico: null
+    },
+    'un-mundo-casi-feliz': {
+      titulo: 'Un Mundo Casi Feliz', anio: 2020, duracion: '3 min', genero: 'Comedia, drama',
+      poster: 'assets/posters/un-mundo-casi-feliz.jpg',
+      sinopsis: 'Jefri y Ariel son roomies que viven inmersos en placeres mundanos, consumismo y una conexión excesiva a la red que los desconecta cada vez más entre ellos.',
+      direccion: 'Danny Camacho', publico: false, linkPublico: null
+    },
+    'lenguaje-inclusivo': {
+      titulo: 'Lenguaje Inclusivo', anio: 2021, duracion: '3 min', genero: 'Comedia',
+      poster: 'assets/posters/lenguaje-inclusivo.jpg',
+      sinopsis: 'Reflejo cómico de la importancia del conocimiento y las posibles consecuencias que puede traer la ignorancia.',
+      direccion: 'Danny Camacho', publico: false, linkPublico: null
+    },
+    'pequenos-gestos': {
+      titulo: 'Pequeños Gestos', anio: 2019, duracion: '3 min', genero: 'Drama, comedia, mockumentary',
+      poster: 'assets/posters/pequenos-gestos.jpg',
+      sinopsis: 'Un inmigrante chino cuenta lo bueno y lo malo de vivir en República Dominicana como inmigrante asiático.',
+      direccion: 'Danny Camacho', publico: false, linkPublico: null
+    },
+    'el-poema-de-lisa': {
+      titulo: 'El Poema de Lisa', anio: 2019, duracion: '13 min', genero: 'Drama, experimental',
+      poster: 'assets/posters/el-poema-de-lisa.jpg',
+      sinopsis: 'Lisa sufre depresión, siente que su vida está vacía, nada tiene sentido para ella. Intenta curar su dolor con drogas, pero eso solo empeorará su vida.',
+      direccion: 'Danny Camacho', publico: false, linkPublico: null
+    },
+    'el-quinto': {
+      titulo: 'El Quinto', anio: 2018, duracion: '15 min', genero: 'Drama, aventura',
+      poster: 'assets/posters/el-quinto.jpg',
+      sinopsis: 'Cinco tipos naufragan en una isla desierta; Ricardo, tratando de sobrevivir, enfrentará un dilema que pondrá a prueba su humanidad.',
+      direccion: 'Danny Camacho', publico: false, linkPublico: null
+    },
+    'la-rueda-rueda': {
+      titulo: 'La Rueda Rueda', anio: 2018, duracion: '6 min', genero: 'Drama (estudiantil)',
+      poster: 'assets/posters/la-rueda-rueda.jpg',
+      sinopsis: 'Pepe le cuenta a su amigo Samuel cómo su primo Kiki contrajo VIH y lo improbable que es que ellos se contagien. La vida de Samuel se volverá caótica porque el mundo es demasiado pequeño.',
+      direccion: 'Danny Camacho', publico: false, linkPublico: null
+    }
+  };
+
+  var shortsPanel = document.getElementById('shortsPanel');
+  var shortsPanelOpenId = null;
+
+  function renderShort(data) {
+    var accion = (data.publico && data.linkPublico)
+      ? '<a class="shorts-panel__ver" href="' + data.linkPublico + '" target="_blank" rel="noopener">▶ Ver</a>'
+      : '<span class="shorts-panel__badge">Actualmente en circuito de festivales</span>';
+
+    return '' +
+      '<div class="shorts-panel__inner">' +
+        '<button class="shorts-panel__close" type="button" aria-label="Cerrar">✕</button>' +
+        '<img class="shorts-panel__poster" src="' + data.poster + '" alt="Póster de ' + data.titulo + '">' +
+        '<div class="shorts-panel__body">' +
+          '<h4 class="shorts-panel__title">' + data.titulo + '</h4>' +
+          '<p class="shorts-panel__meta">' + data.anio + ' · ' + data.genero + ' · ' + data.duracion + '</p>' +
+          '<p class="shorts-panel__synopsis">' + data.sinopsis + '</p>' +
+          '<p class="shorts-panel__credits">Dirección: ' + data.direccion + '</p>' +
+          accion +
+        '</div>' +
+      '</div>';
+  }
+
+  function closeShortsPanel() {
+    if (!shortsPanelOpenId) { return; }
+    shortsPanelOpenId = null;
+    resumeCarousels();
+    gsap.to(shortsPanel, {
+      height: 0, opacity: 0, duration: 0.4, ease: 'power2.inOut',
+      onComplete: function () {
+        shortsPanel.hidden = true;
+        shortsPanel.innerHTML = '';
+        shortsPanel.style.height = '';
+      }
+    });
+  }
+
+  function openShortsPanel(id) {
+    var data = SHORTS[id];
+    if (!data) { return; }
+
+    if (shortsPanelOpenId === id) { closeShortsPanel(); return; } // clic sobre la misma card: cierra
+
+    var wasOpen = !!shortsPanelOpenId;
+    shortsPanelOpenId = id;
+    shortsPanel.innerHTML = renderShort(data);
+    shortsPanel.hidden = false;
+
+    if (wasOpen) {
+      gsap.set(shortsPanel, { height: 'auto', opacity: 1 }); // ya estaba abierto: solo cambia el contenido
+    } else {
+      gsap.fromTo(shortsPanel, { height: 0, opacity: 0 }, { height: 'auto', opacity: 1, duration: 0.45, ease: 'power2.out' });
+    }
+
+    pauseCarousels(); // no se debe mover el carrusel mientras se lee el detalle
+
+    setTimeout(function () {
+      shortsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, wasOpen ? 0 : 200);
+  }
+
+  if (shortsPanel) {
+    document.addEventListener('click', function (e) {
+      var shortCard = e.target.closest('.card[data-short]');
+      if (shortCard) { openShortsPanel(shortCard.dataset.short); return; }
+
+      var closeBtn = e.target.closest('.shorts-panel__close');
+      if (closeBtn) { closeShortsPanel(); }
+    });
+  }
+
+  /* ---------- arranque: un enlace compartido entra directo a la sección,
+     sin splash ni selector de perfiles ---------- */
+
+  var deepLinkSection = PATH_TO_SECTION[location.pathname];
+  if (deepLinkSection) {
+    splash.classList.remove('screen--visible');
+    splash.style.display = 'none';
+    profiles.classList.remove('screen--visible');
+    profiles.style.display = 'none';
+
+    showSection(deepLinkSection, { skipPush: true });
+    app.classList.add('screen--visible');
+    gsap.fromTo(app, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: 'power1.out' });
   }
 })();

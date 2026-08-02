@@ -439,6 +439,14 @@ a { color: inherit; }
   color: var(--dsi-gold);
 }
 
+.dsi__form-error {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  color: #ff8a8a;
+}
+
+.dsi__btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
 /* ---------- footer ---------- */
 
 .dsi__footer {

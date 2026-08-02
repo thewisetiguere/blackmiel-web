@@ -26,7 +26,7 @@
       <span class="splash__b" id="splashB">B</span>
     </div>
     <button class="splash__btn" id="btnEnter" type="button">Entrar</button>
-    <a class="splash__special" href="dia-de-los-santos-inocentes.html">Proyecto especial: Santos Inocentes ↗</a>
+    <a class="splash__special" href="/santos-inocentes">Proyecto especial: Santos Inocentes ↗</a>
   </section>
 
   <!-- ============ PANTALLA 2 · FLASH DE INTRO ============ -->
@@ -67,7 +67,7 @@
         <li><a href="#" data-section="portafolio">Portafolio</a></li>
         <li><a href="#" data-section="contacto">Contacto</a></li>
       </ul>
-      <a class="navbar__cta" href="dia-de-los-santos-inocentes.html">Apóyanos</a>
+      <a class="navbar__cta" href="/santos-inocentes">Apóyanos</a>
     </nav>
 
     <!-- ······ SECCIÓN NOSOTROS ······ -->
@@ -103,39 +103,40 @@
       <section class="row">
         <h3 class="row__title">Cortometrajes</h3>
         <div class="row__scroller row__scroller--posters">
-          <a class="card card--poster" data-hue="1" href="https://filmfreeway.com/projects/3282862" target="_blank" rel="noopener">
+          <button type="button" class="card card--poster" data-hue="1" data-short="el-amuleto">
             <div class="card__thumb"><img src="assets/posters/el-amuleto.jpg" alt="Póster de El Amuleto" loading="lazy"></div>
             <div class="card__info"><h4>El Amuleto</h4><p>2025 · Drama, experimental · 7 min</p></div>
-          </a>
-          <a class="card card--poster" data-hue="3" href="https://filmfreeway.com/projects/3140636" target="_blank" rel="noopener">
+          </button>
+          <button type="button" class="card card--poster" data-hue="3" data-short="cuando-pienso">
             <div class="card__thumb"><img src="assets/posters/cuando-pienso-en-mi-muerte.jpg" alt="Póster de Cuando Pienso en mi Muerte" loading="lazy"></div>
             <div class="card__info"><h4>Cuando Pienso en mi Muerte</h4><p>2024 · Drama · 13 min</p></div>
-          </a>
-          <a class="card card--poster" data-hue="5" href="https://filmfreeway.com/projects/2057486" target="_blank" rel="noopener">
+          </button>
+          <button type="button" class="card card--poster" data-hue="5" data-short="un-mundo-casi-feliz">
             <div class="card__thumb"><img src="assets/posters/un-mundo-casi-feliz.jpg" alt="Póster de Un Mundo Casi Feliz" loading="lazy"></div>
             <div class="card__info"><h4>Un Mundo Casi Feliz</h4><p>2020 · Comedia, drama · 3 min</p></div>
-          </a>
-          <a class="card card--poster" data-hue="2" href="https://filmfreeway.com/projects/2454568" target="_blank" rel="noopener">
-            <div class="card__thumb"><img src="https://filmfreeway-production-storage-01-connector.filmfreeway.com/press_kits/posters/002/072/282/original/de63a5016f-poster.jpg?1682789215" alt="Póster de Lenguaje Inclusivo" loading="lazy"></div>
+          </button>
+          <button type="button" class="card card--poster" data-hue="2" data-short="lenguaje-inclusivo">
+            <div class="card__thumb"><img src="assets/posters/lenguaje-inclusivo.jpg" alt="Póster de Lenguaje Inclusivo" loading="lazy"></div>
             <div class="card__info"><h4>Lenguaje Inclusivo</h4><p>2021 · Comedia · 3 min</p></div>
-          </a>
-          <a class="card card--poster" data-hue="4" href="https://filmfreeway.com/projects/1849851" target="_blank" rel="noopener">
+          </button>
+          <button type="button" class="card card--poster" data-hue="4" data-short="pequenos-gestos">
             <div class="card__thumb"><img src="assets/posters/pequenos-gestos.jpg" alt="Póster de Pequeños Gestos" loading="lazy"></div>
             <div class="card__info"><h4>Pequeños Gestos</h4><p>2019 · Drama, comedia · 3 min</p></div>
-          </a>
-          <a class="card card--poster" data-hue="1" href="https://filmfreeway.com/projects/1838065" target="_blank" rel="noopener">
+          </button>
+          <button type="button" class="card card--poster" data-hue="1" data-short="el-poema-de-lisa">
             <div class="card__thumb"><img src="assets/posters/el-poema-de-lisa.jpg" alt="Póster de El Poema de Lisa" loading="lazy"></div>
             <div class="card__info"><h4>El Poema de Lisa</h4><p>2019 · Drama, experimental · 13 min</p></div>
-          </a>
-          <a class="card card--poster" data-hue="3" href="https://filmfreeway.com/projects/1551568" target="_blank" rel="noopener">
+          </button>
+          <button type="button" class="card card--poster" data-hue="3" data-short="el-quinto">
             <div class="card__thumb"><img src="assets/posters/el-quinto.jpg" alt="Póster de El Quinto" loading="lazy"></div>
             <div class="card__info"><h4>El Quinto</h4><p>2018 · Drama, aventura · 15 min</p></div>
-          </a>
-          <a class="card card--poster" data-hue="5" href="https://filmfreeway.com/projects/1589400" target="_blank" rel="noopener">
-            <div class="card__thumb"><img src="https://filmfreeway-production-storage-01-connector.filmfreeway.com/press_kits/posters/001/207/114/original/437a8209bc-poster.jpg?1543961909" alt="Póster de La Rueda Rueda" loading="lazy"></div>
+          </button>
+          <button type="button" class="card card--poster" data-hue="5" data-short="la-rueda-rueda">
+            <div class="card__thumb"><img src="assets/posters/la-rueda-rueda.jpg" alt="Póster de La Rueda Rueda" loading="lazy"></div>
             <div class="card__info"><h4>La Rueda Rueda</h4><p>2018 · Cortometraje · 6 min</p></div>
-          </a>
+          </button>
         </div>
+        <div class="shorts-panel" id="shortsPanel" hidden></div>
       </section>
 
       <section class="row">
@@ -240,11 +241,14 @@
       <section class="contact">
         <form class="contact__form" id="contactForm" novalidate>
           <h3 class="row__title">Escríbenos</h3>
+          <input type="hidden" name="_subject" value="Nuevo mensaje — Contacto blackmiel.com">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
           <label>Nombre<input type="text" name="nombre" placeholder="Tu nombre" required></label>
           <label>Correo<input type="email" name="correo" placeholder="tu@correo.com" required></label>
           <label>Mensaje<textarea name="mensaje" rows="5" placeholder="Cuéntanos tu proyecto…" required></textarea></label>
           <button class="btn btn--play contact__submit" type="submit">Enviar</button>
           <p class="contact__ok" id="contactOk" hidden>¡Gracias! Te responderemos pronto. 🐝</p>
+          <p class="contact__error" id="contactError" hidden>No se pudo enviar. Intenta de nuevo o escríbenos directo a blackmielrd@gmail.com.</p>
         </form>
         <aside class="contact__data">
           <h3 class="row__title">Datos directos</h3>

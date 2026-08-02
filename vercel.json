@@ -1,12 +1,18 @@
 {
+  "cleanUrls": true,
   "routes": [
     {
       "src": "/",
       "has": [
         { "type": "host", "value": "diadelossantosinocentes.blackmiel.com" }
       ],
-      "dest": "/dia-de-los-santos-inocentes.html"
+      "dest": "/dia-de-los-santos-inocentes"
     },
+    { "src": "/home", "dest": "/index" },
+    { "src": "/nosotros", "dest": "/index" },
+    { "src": "/portafolio", "dest": "/index" },
+    { "src": "/contacto", "dest": "/index" },
+    { "src": "/santos-inocentes", "dest": "/dia-de-los-santos-inocentes" },
     { "handle": "filesystem" }
   ]
 }

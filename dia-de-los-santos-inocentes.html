@@ -19,7 +19,7 @@
   <div class="dsi__vignette"></div>
   <div class="dsi__grain"></div>
 
-  <a class="dsi__back" href="index.html">← blackmiel</a>
+  <a class="dsi__back" href="https://blackmiel.com/">← blackmiel</a>
 
   <header class="dsi__hero">
     <p class="dsi__kicker">28 de diciembre</p>
@@ -141,11 +141,15 @@
       <p class="dsi__body">Escríbenos para recibir el documento completo de niveles de patrocinio y el acuerdo formal.</p>
 
       <form class="dsi__form" id="dsiForm" novalidate>
+        <input type="hidden" name="_subject" value="Nuevo interés de patrocinio — Santos Inocentes">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <label>Nombre<input type="text" name="nombre" placeholder="Tu nombre" required></label>
         <label>Empresa<input type="text" name="empresa" placeholder="Tu empresa (opcional)"></label>
+        <label>Correo<input type="email" name="correo" placeholder="tu@correo.com" required></label>
         <label>Mensaje<textarea name="mensaje" rows="4" placeholder="Cuéntanos tu interés…" required></textarea></label>
         <button class="dsi__btn" type="submit">Enviar</button>
         <p class="dsi__form-ok" id="dsiFormOk" hidden>Gracias, te responderemos pronto.</p>
+        <p class="dsi__form-error" id="dsiFormError" hidden>No se pudo enviar. Escríbenos directo a blackmielrd@gmail.com.</p>
       </form>
     </section>
   </main>

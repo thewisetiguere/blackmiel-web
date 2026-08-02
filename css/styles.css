@@ -519,6 +519,99 @@ button { font-family: inherit; cursor: pointer; }
   display: block;
 }
 
+/* ---------- panel de detalle de Cortometrajes (inline, no modal) ---------- */
+
+.shorts-panel {
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+
+.shorts-panel[hidden] { display: none; }
+
+.shorts-panel__inner {
+  position: relative;
+  display: flex;
+  gap: 1.6rem;
+  background: var(--gris-oscuro);
+  border: 1px solid rgba(242, 150, 6, 0.18);
+  border-radius: 8px;
+  padding: 1.6rem;
+  margin-top: 1.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.shorts-panel__close {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--gris);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.shorts-panel__close:hover { background: rgba(242, 150, 6, 0.18); color: var(--ambar); }
+
+.shorts-panel__poster {
+  flex: 0 0 auto;
+  width: 8rem;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.shorts-panel__body { min-width: 0; padding-right: 2rem; }
+
+.shorts-panel__title { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
+
+.shorts-panel__meta { font-size: 0.85rem; color: var(--ambar); margin-bottom: 0.9rem; }
+
+.shorts-panel__synopsis { font-size: 0.92rem; line-height: 1.6; color: var(--gris); margin-bottom: 0.7rem; }
+
+.shorts-panel__credits { font-size: 0.82rem; color: var(--gris); margin-bottom: 1rem; }
+
+.shorts-panel__badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--gris);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+}
+
+.shorts-panel__ver {
+  display: inline-block;
+  background: var(--ambar);
+  color: var(--negro);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  transition: background 0.2s;
+}
+
+.shorts-panel__ver:hover { background: var(--ambar-oscuro); }
+
+@media (max-width: 640px) {
+  .shorts-panel { margin-left: 1.2rem; margin-right: 1.2rem; }
+  .shorts-panel__inner { flex-direction: column; }
+  .shorts-panel__poster { width: 6rem; }
+  .shorts-panel__body { padding-right: 0; }
+}
+
 .card:hover {
   transform: translateY(-6px) scale(1.1);
   z-index: 5;
@@ -662,6 +755,8 @@ button { font-family: inherit; cursor: pointer; }
 .contact__submit { align-self: flex-start; }
 
 .contact__ok { color: var(--ambar); font-weight: 600; }
+.contact__error { color: #ff6b6b; font-weight: 600; }
+.contact__submit[disabled] { opacity: 0.6; cursor: not-allowed; }
 
 .contact__data { position: relative; }
 
