@@ -409,6 +409,73 @@ button { font-family: inherit; cursor: pointer; }
 .btn--info { background: rgba(255, 255, 255, 0.14); color: var(--blanco); }
 .btn--info:hover { background: rgba(255, 255, 255, 0.25); }
 
+/* ---------- crew (Nosotros) ---------- */
+
+.crew { padding: 1rem 3rem 4.5rem; }
+
+.crew__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 1.8rem 1.4rem;
+  max-width: 1200px;
+}
+
+.crew__member { position: relative; }
+
+.crew__photo {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--gris-oscuro);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.crew__photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.85) 100%);
+  z-index: 1;
+  transition: opacity 0.4s ease;
+}
+
+.crew__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+}
+
+.crew__member:hover .crew__photo {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(242, 150, 6, 0.3);
+}
+
+.crew__member:hover .crew__photo img {
+  transform: scale(1.08);
+  filter: grayscale(0.2) contrast(1.05) saturate(1.1);
+}
+
+.crew__member figcaption { margin-top: 0.8rem; }
+
+.crew__name { font-size: 0.95rem; font-weight: 700; }
+
+.crew__role {
+  font-size: 0.78rem;
+  color: var(--gris);
+  margin-top: 0.15rem;
+  transition: color 0.3s ease;
+}
+
+.crew__member:hover .crew__role { color: var(--ambar); }
+
+@media (max-width: 720px) {
+  .crew { padding: 0.5rem 1.2rem 3rem; }
+  .crew__grid { grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: 1.4rem 1rem; }
+}
+
 /* ---------- filas / carousels ---------- */
 
 .row { padding: 1.4rem 0 1.4rem 3rem; }
