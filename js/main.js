@@ -229,11 +229,12 @@
     reelFrame.innerHTML = ''; // detiene la reproducción al cerrar
   }
 
-  // cualquier card de portafolio con data-video abre el mismo modal
-  // (delegado en document para que también funcione en los clones del carrusel)
+  // cualquier elemento con data-video (card de portafolio o botón "Ver ahora"
+  // del panel de Cortometrajes) abre el mismo modal — delegado en document
+  // para que también funcione en los clones del carrusel
   document.addEventListener('click', function (e) {
-    var card = e.target.closest('.card[data-video]');
-    if (card) { openReel(card.dataset.video); }
+    var el = e.target.closest('[data-video]');
+    if (el) { openReel(el.dataset.video); }
   });
 
   if (btnPlayReel) {
@@ -461,25 +462,25 @@
       titulo: 'Un Mundo Casi Feliz', anio: 2020, duracion: '3 min', genero: 'Comedia, drama',
       poster: 'assets/posters/un-mundo-casi-feliz.jpg',
       sinopsis: 'Jefri y Ariel son roomies que viven inmersos en placeres mundanos, consumismo y una conexión excesiva a la red que los desconecta cada vez más entre ellos.',
-      direccion: 'Danny Camacho', publico: false, linkPublico: null
+      direccion: 'Danny Camacho', publico: true, linkPublico: 'D4NoyatJI2c'
     },
     'lenguaje-inclusivo': {
       titulo: 'Lenguaje Inclusivo', anio: 2021, duracion: '3 min', genero: 'Comedia',
       poster: 'assets/posters/lenguaje-inclusivo.jpg',
       sinopsis: 'Reflejo cómico de la importancia del conocimiento y las posibles consecuencias que puede traer la ignorancia.',
-      direccion: 'Danny Camacho', publico: false, linkPublico: null
+      direccion: 'Danny Camacho', publico: true, linkPublico: 'qWuw8Tl20gU'
     },
     'pequenos-gestos': {
       titulo: 'Pequeños Gestos', anio: 2019, duracion: '3 min', genero: 'Drama, comedia, mockumentary',
       poster: 'assets/posters/pequenos-gestos.jpg',
       sinopsis: 'Un inmigrante chino cuenta lo bueno y lo malo de vivir en República Dominicana como inmigrante asiático.',
-      direccion: 'Danny Camacho', publico: false, linkPublico: null
+      direccion: 'Danny Camacho', publico: true, linkPublico: 'R2xGSv43sDY'
     },
     'el-poema-de-lisa': {
       titulo: 'El Poema de Lisa', anio: 2019, duracion: '13 min', genero: 'Drama, experimental',
       poster: 'assets/posters/el-poema-de-lisa.jpg',
       sinopsis: 'Lisa sufre depresión, siente que su vida está vacía, nada tiene sentido para ella. Intenta curar su dolor con drogas, pero eso solo empeorará su vida.',
-      direccion: 'Danny Camacho', publico: false, linkPublico: null
+      direccion: 'Danny Camacho', publico: true, linkPublico: 'oX9WUNM7qW8'
     },
     'el-quinto': {
       titulo: 'El Quinto', anio: 2018, duracion: '15 min', genero: 'Drama, aventura',
@@ -491,7 +492,7 @@
       titulo: 'La Rueda Rueda', anio: 2018, duracion: '6 min', genero: 'Drama (estudiantil)',
       poster: 'assets/posters/la-rueda-rueda.jpg',
       sinopsis: 'Pepe le cuenta a su amigo Samuel cómo su primo Kiki contrajo VIH y lo improbable que es que ellos se contagien. La vida de Samuel se volverá caótica porque el mundo es demasiado pequeño.',
-      direccion: 'Danny Camacho', publico: false, linkPublico: null
+      direccion: 'Danny Camacho', publico: true, linkPublico: 'elM8bt55nHo'
     }
   };
 
@@ -500,7 +501,7 @@
 
   function renderShort(data) {
     var accion = (data.publico && data.linkPublico)
-      ? '<a class="shorts-panel__ver" href="' + data.linkPublico + '" target="_blank" rel="noopener">▶ Ver</a>'
+      ? '<button class="shorts-panel__ver" type="button" data-video="' + data.linkPublico + '">▶ Ver ahora</button>'
       : '<span class="shorts-panel__badge">Actualmente en circuito de festivales</span>';
 
     return '' +
