@@ -779,8 +779,4 @@ button { font-family: inherit; cursor: pointer; }
   .card { width: 42vw; }
 
   .contact { grid-template-columns: 1fr; padding: 1.5rem 1.2rem 3rem; gap: 2rem; }
-
-  /* el video de intro es horizontal; en pantallas angostas "cover" recorta
-     demasiado y el logo queda fuera de cuadro — con "contain" se ve completo */
-  .splash__video { object-fit: contain; }
 }

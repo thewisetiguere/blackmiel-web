@@ -18,7 +18,10 @@
 
   <!-- ============ PANTALLA 1 · SPLASH ============ -->
   <section id="splash" class="screen screen--visible">
-    <video id="introVideo" class="splash__video" src="assets/intro.mp4" muted playsinline preload="auto"></video>
+    <video id="introVideo" class="splash__video" muted playsinline preload="auto">
+      <source src="assets/intro-mobile.mp4" media="(max-width: 720px)">
+      <source src="assets/intro.mp4">
+    </video>
     <div class="splash__center">
       <span class="splash__b" id="splashB">B</span>
     </div>
