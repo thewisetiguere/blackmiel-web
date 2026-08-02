@@ -1,11 +1,12 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/",
+      "src": "/",
       "has": [
         { "type": "host", "value": "diadelossantosinocentes.blackmiel.com" }
       ],
-      "destination": "/dia-de-los-santos-inocentes.html"
-    }
+      "dest": "/dia-de-los-santos-inocentes.html"
+    },
+    { "handle": "filesystem" }
   ]
 }
