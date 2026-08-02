@@ -507,6 +507,19 @@ button { font-family: inherit; cursor: pointer; }
 .row__scroller::-webkit-scrollbar-thumb { background: rgba(242, 150, 6, 0.35); border-radius: 3px; }
 .row__scroller::-webkit-scrollbar-track { background: transparent; }
 
+@media (hover: hover) and (pointer: fine) {
+  .row__scroller { cursor: grab; }
+}
+
+.row__scroller--dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.row__scroller--dragging * { pointer-events: none; }
+.row__scroller img { -webkit-user-drag: none; user-drag: none; }
+
 /* ---------- track + flechas (carrusel, inyectado por JS en Portafolio) ---------- */
 
 .row__track { position: relative; }

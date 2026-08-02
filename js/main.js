@@ -301,6 +301,17 @@
   var carousels = []; // estado de cada fila inicializada
   var carouselsReady = false;
 
+  // tras un arrastre con movimiento real, se descarta el click que le sigue
+  // para no abrir una card sin querer al soltar el mouse
+  function suppressNextClick() {
+    var handler = function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      document.removeEventListener('click', handler, true);
+    };
+    document.addEventListener('click', handler, true);
+  }
+
   function initPortfolioCarousels() {
     if (carouselsReady) { return; }
     carouselsReady = true;
@@ -412,6 +423,48 @@
 
       track.addEventListener('pointerenter', function () { clearTimeout(state.timer); });
       track.addEventListener('pointerleave', function () { restartTimer(); });
+
+      // arrastre con mouse en desktop (en móvil el touch ya arrastra nativo)
+      var drag = { active: false, moved: false, startX: 0, startScroll: 0, pointerId: null };
+
+      scroller.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse') { return; }
+        drag.active = true;
+        drag.moved = false;
+        drag.startX = e.clientX;
+        drag.startScroll = scroller.scrollLeft;
+        drag.pointerId = e.pointerId;
+        clearTimeout(state.timer);
+        // sin capturar el puntero todavía: capturarlo en un click simple
+        // (sin movimiento) reasigna el "click" posterior al scroller y
+        // rompe la apertura del panel de la card
+      });
+
+      scroller.addEventListener('pointermove', function (e) {
+        if (!drag.active) { return; }
+        var dx = e.clientX - drag.startX;
+        // sólo entra en "modo arrastre" tras cruzar el umbral, para no
+        // interferir con el hit-test de un click simple (sin movimiento)
+        if (!drag.moved && Math.abs(dx) > 4) {
+          drag.moved = true;
+          scroller.classList.add('row__scroller--dragging');
+          scroller.setPointerCapture(drag.pointerId);
+        }
+        if (!drag.moved) { return; }
+        scroller.scrollLeft = drag.startScroll - dx;
+      });
+
+      function endDrag() {
+        if (!drag.active) { return; }
+        drag.active = false;
+        scroller.classList.remove('row__scroller--dragging');
+        restartTimer();
+        if (drag.moved) { suppressNextClick(); }
+      }
+
+      scroller.addEventListener('pointerup', endDrag);
+      scroller.addEventListener('pointercancel', endDrag);
+      scroller.addEventListener('pointerleave', function () { if (drag.active) { endDrag(); } });
 
       // arranque escalonado por fila para que no se muevan sincronizadas
       setTimeout(restartTimer, idx * 500);
