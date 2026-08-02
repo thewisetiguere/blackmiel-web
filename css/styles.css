@@ -75,6 +75,10 @@ button { font-family: inherit; cursor: pointer; }
   text-shadow: 0 0 60px rgba(242, 150, 6, 0.35);
   will-change: transform, opacity;
   transition: opacity 0.8s ease;
+  /* oculta por defecto: mientras el video de intro carga, la pantalla
+     se ve simplemente negra en vez de mostrar la B como placeholder.
+     Solo se revela si el video falla (ver fallbackAnimation en main.js) */
+  opacity: 0;
 }
 
 .splash__btn {
@@ -270,6 +274,24 @@ button { font-family: inherit; cursor: pointer; }
 
 .navbar__links a:hover { color: var(--blanco); }
 .navbar__links a.active { color: var(--ambar); font-weight: 600; }
+
+.navbar__cta {
+  margin-left: auto;
+  background: var(--ambar);
+  color: var(--negro);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+
+.navbar__cta:hover {
+  background: var(--ambar-oscuro);
+  box-shadow: 0 0 16px rgba(242, 150, 6, 0.45);
+  transform: translateY(-1px);
+}
 
 /* ---------- secciones ---------- */
 
@@ -515,6 +537,19 @@ button { font-family: inherit; cursor: pointer; }
   overflow: hidden;
 }
 
+.card__thumb::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.35s ease;
+  pointer-events: none;
+}
+
+.card:hover .card__thumb::before {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .card__thumb img {
   width: 100%;
   height: 100%;
@@ -731,10 +766,11 @@ button { font-family: inherit; cursor: pointer; }
 /* ============ RESPONSIVE ============ */
 
 @media (max-width: 720px) {
-  .navbar { padding: 0.8rem 1.2rem; gap: 1.2rem; }
-  .navbar__logo { height: 1.8rem; }
-  .navbar__links { gap: 1rem; }
-  .navbar__links a { font-size: 0.85rem; }
+  .navbar { padding: 0.7rem 0.9rem; gap: 0.6rem; }
+  .navbar__logo { height: 1.5rem; }
+  .navbar__links { gap: 0.6rem; }
+  .navbar__links a { font-size: 0.72rem; }
+  .navbar__cta { font-size: 0.68rem; padding: 0.4rem 0.7rem; }
 
   .hero { padding: 5rem 1.2rem 3rem; min-height: 60vh; }
   .row { padding-left: 1.2rem; }
@@ -743,4 +779,8 @@ button { font-family: inherit; cursor: pointer; }
   .card { width: 42vw; }
 
   .contact { grid-template-columns: 1fr; padding: 1.5rem 1.2rem 3rem; gap: 2rem; }
+
+  /* el video de intro es horizontal; en pantallas angostas "cover" recorta
+     demasiado y el logo queda fuera de cuadro — con "contain" se ve completo */
+  .splash__video { object-fit: contain; }
 }

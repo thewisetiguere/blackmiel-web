@@ -74,7 +74,8 @@
       onComplete: showProfiles
     });
 
-    tl.to(splashB, { scale: 0.92, duration: 0.55, ease: 'power2.in' }, 0)
+    tl.set(splashB, { opacity: 1 }, 0) // solo aquí se revela: el video falló
+      .to(splashB, { scale: 0.92, duration: 0.55, ease: 'power2.in' }, 0)
       .to(splashB, { scale: 45, duration: 2.4, ease: 'expo.inOut' }, 0.55)
       .to(introFlash, { opacity: 1, duration: 0.28, ease: 'power1.in' }, 2.15)
       .to(introFlash, { opacity: 0, duration: 0.7, ease: 'power2.out' }, 2.5)
