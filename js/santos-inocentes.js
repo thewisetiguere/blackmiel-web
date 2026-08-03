@@ -14,6 +14,18 @@
 
   reveals.forEach(function (el) { observer.observe(el); });
 
+  /* ---------- galería: slideshow con desvanecimiento lento ---------- */
+
+  var gallerySlides = document.querySelectorAll('.dsi__gallery-slide');
+  if (gallerySlides.length > 1) {
+    var galleryIdx = 0;
+    setInterval(function () {
+      gallerySlides[galleryIdx].classList.remove('dsi__gallery-slide--active');
+      galleryIdx = (galleryIdx + 1) % gallerySlides.length;
+      gallerySlides[galleryIdx].classList.add('dsi__gallery-slide--active');
+    }, 6500);
+  }
+
   /* ---------- panel desplegable de niveles de patrocinio ---------- */
 
   var btnToggle = document.getElementById('btnTogglePatrocinio');
